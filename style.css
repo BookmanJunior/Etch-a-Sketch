@@ -15,11 +15,11 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    min-width: 32em;
+    max-width: 32em;
 }
 
 .grid {
     border: 1px solid black;
-    flex-basis: 2em;
-    min-height: 2em;
+    width: 2em;
+    height: 2em;
 }
