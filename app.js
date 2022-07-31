@@ -1,7 +1,13 @@
 const gridContainer = document.getElementById("gridContainer");
 const gridSizeBtn = document.getElementById("gridSize");
+const gridElements = gridContainer.getElementsByTagName("div");
 
 gridSizeBtn.addEventListener("click", createNewGrid);
+gridContainer.addEventListener("mouseover", (e) => {
+    if (e.target.className === 'grid') {
+        e.target.className = 'grid painted';
+    };
+});
 
 function defaultGrid() {
   for (let i = 0; i !== 16 ** 2; i++) {
@@ -34,7 +40,6 @@ function setGridElementSize(gridElement, gridElementSize) {
 }
 
 function removeGridElements() {
-  let gridElements = gridContainer.getElementsByTagName("div");
   Array.from(gridElements).forEach((gridElement) => gridElement.remove());
 }
 
