@@ -27,3 +27,7 @@ body {
 .grid-size-btn {
     margin-bottom: 1em;
 }
+
+.painted {
+    background-color: black;
+}
