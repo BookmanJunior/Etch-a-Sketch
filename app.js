@@ -6,34 +6,34 @@ const rgbBtn = document.getElementById("RandomColorBtn");
 const clearBtn = document.getElementById("clearBtn");
 const eraserBtn = document.getElementById("eraserBtn");
 
-let colorModeBtnClicked = false;
-let rgbBtnClicked = false;
-let eraserBtnClicked = false;
+let colorModeBtnActive = false;
+let rgbBtnActive = false;
+let eraserBtnActive = false;
 
 gridSizeBtn.addEventListener("click", createNewGrid);
 clearBtn.addEventListener("click", clearGrid);
 gridContainer.addEventListener("mouseover", drawOnGrid);
 colorModeBtn.addEventListener("click", () => {
-  colorModeBtnClicked = true;
-  rgbBtnClicked = false;
-  eraserBtnClicked = false;
+  colorModeBtnActive = true;
+  rgbBtnActive = false;
+  eraserBtnActive = false;
 });
 
 rgbBtn.addEventListener("click", () => {
-  rgbBtnClicked = true;
-  colorModeBtnClicked = false;
-  eraserBtnClicked = false;
+  rgbBtnActive = true;
+  colorModeBtnActive = false;
+  eraserBtnActive = false;
 });
 
 eraserBtn.addEventListener("click", () => {
-  eraserBtnClicked = true;
-  colorModeBtnClicked = false;
-  rgbBtnClicked = false;
+  eraserBtnActive = true;
+  colorModeBtnActive = false;
+  rgbBtnActive = false;
 });
 
-function defaultGrid() {
-    createGridElements(16)
-  }
+
+// Create default 16x16 grid on load
+createGridElements(16);
 
 function createNewGrid() {
   let newGridSize = Number(prompt("Enter a new size: ", "e.g 24"));
@@ -41,8 +41,8 @@ function createNewGrid() {
   if (newGridSize >= 16 && newGridSize <= 100) {
     removeGridElements();
     createGridElements(newGridSize);
-    }
   }
+}
 
 function createGridElements(gridSize) {
   for (let i = 0; i !== gridSize ** 2; i++) {
@@ -69,30 +69,22 @@ function clearGrid() {
   Array.from(gridElements).forEach((gridElement) => {
     gridElement.style.background = `rgb(255, 255, 255)`;
   });
-  colorModeBtnClicked = true;
+  colorModeBtnActive = true;
 }
 
 function drawOnGrid(e) {
-  if (colorModeBtnClicked) {
-    if (e.target.className === "grid") {
+  if (e.target.className === "grid") {
+    if (colorModeBtnActive) {
       e.target.style.backgroundColor = `rgba(0, 0, 0, 100)`;
-    }
-  } else if (rgbBtnClicked) {
-    let r = Math.floor(Math.random() * 255);
-    let g = Math.floor(Math.random() * 255);
-    let b = Math.floor(Math.random() * 255);
-    if (e.target.className === "grid") {
+    } else if (rgbBtnActive) {
+      let r = Math.floor(Math.random() * 255);
+      let g = Math.floor(Math.random() * 255);
+      let b = Math.floor(Math.random() * 255);
       e.target.style.backgroundColor = `rgba(${r}, ${g}, ${b}, 100)`;
-    }
-  } else if (eraserBtnClicked) {
-    if (e.target.className === "grid") {
+    } else if (eraserBtnActive) {
       e.target.style.background = "rgb(255, 255, 255)";
-    }
-  } else {
-    if (e.target.className === "grid") {
+    } else {
       e.target.style.backgroundColor = `rgba(0, 0, 0, 100)`;
     }
   }
 }
-
-defaultGrid();
