@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,15 +9,16 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.container {
+
+.grid-container {
     display: flex;
     flex-wrap: wrap;
     max-width: 32em;
+    box-shadow: 1px 1px 10px 1px rgba(0,0,0,50);
 }
 
 .grid {
@@ -24,15 +27,38 @@ body {
     height: 2em;
 }
 
+.buttons {
+    display: flex;
+    width: 32em;
+    gap: 10px;
+    max-height: 56px;
+    margin-bottom: 1.5em; 
+}
+
 button {
-    margin-bottom: 1em;
-    padding: 8px 16px;
+    padding: 10px 10px;
     border-radius: 5px;
     background-color: white;
     outline: 0;
     border: 1px solid black;
+    flex: 1;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 64px;
+    margin: 50px 0;
+    letter-spacing: 12px;
+    text-align: center;
+
 }
 
 .painted {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 10%);
 }
