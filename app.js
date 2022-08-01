@@ -16,11 +16,13 @@ gridContainer.addEventListener("mouseover", drawOnGrid);
 colorModeBtn.addEventListener("click", () => {
   colorModeBtnClicked = true;
   rgbBtnClicked = false;
+  eraserBtnClicked = false;
 });
 
 rgbBtn.addEventListener("click", () => {
   rgbBtnClicked = true;
   colorModeBtnClicked = false;
+  eraserBtnClicked = false;
 });
 
 eraserBtn.addEventListener("click", () => {
@@ -30,24 +32,24 @@ eraserBtn.addEventListener("click", () => {
 });
 
 function defaultGrid() {
-  for (let i = 0; i !== 16 ** 2; i++) {
-    const div = document.createElement("div");
-    div.className = "grid";
-    gridContainer.appendChild(div);
+    createGridElements(16)
   }
-}
 
 function createNewGrid() {
   let newGridSize = Number(prompt("Enter a new size: ", "e.g 24"));
 
   if (newGridSize >= 16 && newGridSize <= 100) {
     removeGridElements();
-    for (let i = 0; i !== newGridSize ** 2; i++) {
-      const newDiv = document.createElement("div");
-      newDiv.className = "grid";
-      gridContainer.appendChild(newDiv);
-      setGridElementSize(newDiv, newGridSize);
+    createGridElements(newGridSize);
     }
+  }
+
+function createGridElements(gridSize) {
+  for (let i = 0; i !== gridSize ** 2; i++) {
+    const newDiv = document.createElement("div");
+    newDiv.className = "grid";
+    gridContainer.appendChild(newDiv);
+    setGridElementSize(newDiv, gridSize);
   }
 }
 
@@ -67,6 +69,7 @@ function clearGrid() {
   Array.from(gridElements).forEach((gridElement) => {
     gridElement.style.background = `rgb(255, 255, 255)`;
   });
+  colorModeBtnClicked = true;
 }
 
 function drawOnGrid(e) {
@@ -74,8 +77,7 @@ function drawOnGrid(e) {
     if (e.target.className === "grid") {
       e.target.style.backgroundColor = `rgba(0, 0, 0, 100)`;
     }
-  }
-  if (rgbBtnClicked) {
+  } else if (rgbBtnClicked) {
     let r = Math.floor(Math.random() * 255);
     let g = Math.floor(Math.random() * 255);
     let b = Math.floor(Math.random() * 255);
